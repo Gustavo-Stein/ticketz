@@ -143,18 +143,6 @@ const Dashboard = () => {
   if (currentUser?.profile !== "admin") return <div />;
 
   return (
-    <div>
-      <Container maxWidth="lg" className={classes.container}>
-        <Grid container spacing={3} justifyContent="flex-start">
-
-          {/* Caixa de Apoio / Doações */}
-          {/* Mantido */}
-
-          {/* Outros cards, filtros e gráficos */}
-
-        </Grid>
-      </Container>
-    </div>
   );
 };
 
