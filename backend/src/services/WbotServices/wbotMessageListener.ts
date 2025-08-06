@@ -3,6 +3,7 @@ import { promisify } from "util";
 import fs, { writeFile } from "fs";
 import * as Sentry from "@sentry/node";
 import { isNil, head, keys } from "lodash";
+import OldMessage from "../../models/OldMessage";
 
 import {
   WASocket,
@@ -861,7 +862,13 @@ export const verifyEditedMessage = async (
     dataJson: editedMsg.dataJson,
     isEdited: true
   };
+  const oldMessage = {
+    messageId: messageData.id,
+    body: editedMsg.body,
+    ticketId: editedMsg.ticketId
+  };
 
+  await OldMessage.upsert(oldMessage);
  
   await ticket.update({
     lastMessage: messageData.body
