@@ -2,6 +2,7 @@ import { checkCompanyCompliant } from "../../helpers/CheckCompanyCompliant";
 import { getIO } from "../../libs/socket";
 import Contact from "../../models/Contact";
 import Message from "../../models/Message";
+import OldMessage from "../../models/OldMessage";
 import Ticket from "../../models/Ticket";
 import Whatsapp from "../../models/Whatsapp";
 import { logger } from "../../utils/logger";
@@ -65,7 +66,15 @@ const CreateMessageService = async ({
           companyId
         },
         required: false
-      }      
+      } ,
+      {
+        model: OldMessage,
+        as: "oldMessages",
+        where: {
+          ticketId: messageData.ticketId
+        },
+        required: false
+      }     
     ]
   });
 
