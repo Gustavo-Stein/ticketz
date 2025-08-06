@@ -124,9 +124,6 @@ class Message extends Model {
   @BelongsTo(() => Queue)
   queue: Queue;
 
-  @HasMany(() => OldMessage)
-  oldMessages: OldMessage[];
-
   @HasMany(() => Message, "quotedMsgId")
   replies: Message[];
 }
