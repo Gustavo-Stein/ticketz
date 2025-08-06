@@ -1,7 +1,6 @@
 import AppError from "../../errors/AppError";
 import GetTicketWbot from "../../helpers/GetTicketWbot";
 import Message from "../../models/Message";
-import OldMessage from "../../models/OldMessage";
 import Ticket from "../../models/Ticket";
 
 import formatBody from "../../helpers/Mustache";
@@ -69,14 +68,7 @@ const EditWhatsAppMessage = async ({
       {}
     );
 
-    const oldMessage = {
-      messageId,
-      body: message.body,
-      ticketId: message.ticketId
-    };
-
-    await OldMessage.upsert(oldMessage);
-
+        
     await message.update({ body: formattedBody, isEdited: true });
 
     await ticket.update({ lastMessage: formattedBody });
@@ -111,14 +103,6 @@ const EditWhatsAppMessage = async ({
           include: ["contact"],
           where: {
             companyId
-          },
-          required: false
-        },
-        {
-          model: OldMessage,
-          as: "oldMessages",
-          where: {
-            ticketId: message.ticketId
           },
           required: false
         }
