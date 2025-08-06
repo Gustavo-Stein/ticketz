@@ -15,7 +15,7 @@ import Contact from "./Contact";
 import Ticket from "./Ticket";
 import Company from "./Company";
 import Queue from "./Queue";
-import OldMessage from "./OldMessage";
+
 
 @Table
 class Message extends Model {
