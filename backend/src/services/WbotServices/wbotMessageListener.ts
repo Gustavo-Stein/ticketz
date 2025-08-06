@@ -25,7 +25,7 @@ import { Sequelize } from "sequelize-typescript";
 import Contact from "../../models/Contact";
 import Ticket from "../../models/Ticket";
 import Message from "../../models/Message";
-import OldMessage from "../../models/OldMessage";
+
 
 import { getIO } from "../../libs/socket";
 import CreateMessageService from "../MessageServices/CreateMessageService";
@@ -862,14 +862,7 @@ export const verifyEditedMessage = async (
     isEdited: true
   };
 
-  const oldMessage = {
-    messageId: messageData.id,
-    body: editedMsg.body,
-    ticketId: editedMsg.ticketId
-  };
-
-  await OldMessage.upsert(oldMessage);
-
+ 
   await ticket.update({
     lastMessage: messageData.body
   });
